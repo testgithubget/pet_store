@@ -1,1 +1,37 @@
-<p>pet-form works!</p>
+<mat-card>
+    <form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Pet Name</mat-label>
+        <input matInput formControlName="name" required />
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <input matInput formControlName="category" required />
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Upload Photo</mat-label>
+        <input type="file" (change)="onFileChange($event)" accept="image/*" />
+      </mat-form-field>
+  
+      <mat-label>Tags</mat-label>
+      <div class="tags">
+        <mat-checkbox *ngFor="let tag of tags" [formControlName]="'tags.' + tag.id">
+          {{ tag.name }}
+        </mat-checkbox>
+      </div>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="available">Available</mat-option>
+          <mat-option value="pending">Pending</mat-option>
+          <mat-option value="sold">Sold</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="petForm.invalid">Submit</button>
+    </form>
+  </mat-card>
+  
