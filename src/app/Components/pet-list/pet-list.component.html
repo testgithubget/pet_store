@@ -1,1 +1,59 @@
-<p>pet-list works!</p>
+
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Favorite food</mat-label>
+      <input matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+  </form>
+
+
+
+  <section>
+    <div class="example-button-row">
+      <button mat-raised-button>Basic</button>
+    </div>
+  </section>
+
+
+
+  <h4>Basic mat-select</h4>
+  <mat-form-field>
+    <mat-select>
+      @for (food of foods; track food) {
+        <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  
+
+  <mat-card class="example-card" appearance="outlined">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-footer class="example-card-footer">
+    <mat-chip-set aria-label="Chihuahua traits">
+      <mat-chip>charming</mat-chip>
+      <mat-chip>graceful</mat-chip>
+      <mat-chip>sassy</mat-chip>
+    </mat-chip-set>
+  </mat-card-footer>
+  </mat-card>
+
+
+
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
