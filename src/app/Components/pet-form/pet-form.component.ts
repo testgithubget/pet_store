@@ -116,8 +116,8 @@ export class PetFormComponent implements OnInit {
       this.petService.createPet(pet).subscribe({
         next: (newPet) => {
           console.log('Pet created successfully:', newPet);
-          this.petForm.reset();
-          this.imagePreview = null; 
+          // this.petForm.reset();
+          // this.imagePreview = null; 
         },
         error: (err) => {
           console.error('Error creating pet:', err);

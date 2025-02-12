@@ -1,1 +1,29 @@
-<p>pet-detail works!</p>
+<mat-card class="pet-detail-card">
+    <mat-card-header>
+      <mat-card-title>{{ pet?.name }}</mat-card-title>
+      <mat-card-subtitle>{{ pet?.breed }}</mat-card-subtitle>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <div class="pet-detail-container">
+        <!-- Pet Image -->
+        <div class="pet-image">
+          <img *ngIf="pet?.image" [src]="pet.image" alt="{{ pet?.name }}" />
+        </div>
+  
+        <!-- Pet Information -->
+        <div class="pet-info">
+          <p><strong>Age:</strong> {{ pet?.age }} years</p>
+          <p><strong>Type:</strong> {{ pet?.type }}</p>
+          <p><strong>Owner:</strong> {{ pet?.owner }}</p>
+          <p><strong>Description:</strong> {{ pet?.description }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+  
+    <mat-card-actions>
+      <!-- <button mat-raised-button color="accent" (click)="editPet()">Edit</button>
+      <button mat-raised-button color="warn" (click)="deletePet()">Delete</button> -->
+    </mat-card-actions>
+  </mat-card>
+  
