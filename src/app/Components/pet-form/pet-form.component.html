@@ -1,37 +1,64 @@
-<mat-card>
-    <form [formGroup]="petForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill">
-        <mat-label>Pet Name</mat-label>
-        <input matInput formControlName="name" required />
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Category</mat-label>
-        <input matInput formControlName="category" required />
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Upload Photo</mat-label>
-        <input type="file" (change)="onFileChange($event)" accept="image/*" />
-      </mat-form-field>
-  
-      <mat-label>Tags</mat-label>
-      <div class="tags">
-        <mat-checkbox *ngFor="let tag of tags" [formControlName]="'tags.' + tag.id">
-          {{ tag.name }}
-        </mat-checkbox>
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-title>🐾 Pet Form</mat-card-title>
+
+    <div class="form-container">
+      <div class="image-uploader">
+        <label>Upload Photo:</label>
+        <input type="file" (change)="onFileChange($event)" />
+        <img *ngIf="imagePreview" [src]="imagePreview" class="image-preview" />
       </div>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="status">
-          <mat-option value="available">Available</mat-option>
-          <mat-option value="pending">Pending</mat-option>
-          <mat-option value="sold">Sold</mat-option>
-        </mat-select>
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit" [disabled]="petForm.invalid">Submit</button>
-    </form>
+
+      <div class="right-section">
+        <mat-form-field appearance="outline">
+          <mat-label>Pet Name</mat-label>
+          <input matInput formControlName="name" required />
+        </mat-form-field>
+
+        <div formGroupName="category">
+          <mat-form-field appearance="outline">
+            <mat-label>Category ID</mat-label>
+            <input matInput formControlName="id" type="number" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Category Name</mat-label>
+            <input matInput formControlName="name" required />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="available">Available</mat-option>
+            <mat-option value="pending">Pending</mat-option>
+            <mat-option value="sold">Sold</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div formArrayName="tags">
+          <p>Tags:</p>
+          <div *ngFor="let tag of tags.controls; let i = index" [formGroupName]="i">
+            <mat-form-field appearance="outline">
+              <mat-label>Tag Name</mat-label>
+              <input matInput formControlName="name" placeholder="Enter tag name" />
+            </mat-form-field>
+
+            <button mat-icon-button color="warn" (click)="removeTag(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <button mat-raised-button color="primary" type="button" (click)="addTag()">
+            <mat-icon>add</mat-icon> Add Tag
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; justify-content: flex-start;">
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="accent" type="button">List</button>
+    </div>
   </mat-card>
-  
+</form>
