@@ -26,7 +26,7 @@ export class PetService {
     return this.http.get<Pet>(`${this.baseUrl}/${id}`);
   }
 
-  getPetByStatus(status: string): Observable<Pet> {
+  getPetByStatus(status: number): Observable<Pet> {
     return this.http.get<Pet>(`${this.baseUrl}/${status}`);
   }
 

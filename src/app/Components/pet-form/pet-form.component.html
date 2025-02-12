@@ -9,25 +9,26 @@
         <img *ngIf="imagePreview" [src]="imagePreview" class="image-preview" />
       </div>
 
-      <div class="right-section">
-        <mat-form-field appearance="outline">
+      <div class="right-section" style="display: flex; flex-wrap: wrap; gap: 16px;">
+
+        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
           <mat-label>Pet Name</mat-label>
           <input matInput formControlName="name" required />
         </mat-form-field>
-
-        <div formGroupName="category">
-          <mat-form-field appearance="outline">
+      
+        <div formGroupName="category" style="display: flex; flex-wrap: wrap; gap: 16px; width: 100%;">
+          <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
             <mat-label>Category ID</mat-label>
             <input matInput formControlName="id" type="number" />
           </mat-form-field>
-
-          <mat-form-field appearance="outline">
+      
+          <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
             <mat-label>Category Name</mat-label>
             <input matInput formControlName="name" required />
           </mat-form-field>
         </div>
-
-        <mat-form-field appearance="outline">
+      
+        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
           <mat-label>Status</mat-label>
           <mat-select formControlName="status">
             <mat-option value="available">Available</mat-option>
@@ -35,26 +36,30 @@
             <mat-option value="sold">Sold</mat-option>
           </mat-select>
         </mat-form-field>
-
-        <div formArrayName="tags">
+      
+        <div formArrayName="tags" style="width: 100%;">
           <p>Tags:</p>
-          <div *ngFor="let tag of tags.controls; let i = index" [formGroupName]="i">
-            <mat-form-field appearance="outline">
+          <div *ngFor="let tag of tags.controls; let i = index" [formGroupName]="i" 
+               style="display: flex; align-items: center; gap: 10px;">
+            <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
               <mat-label>Tag Name</mat-label>
               <input matInput formControlName="name" placeholder="Enter tag name" />
             </mat-form-field>
-
-            <button mat-icon-button color="warn" (click)="removeTag(i)">
+            <button mat-icon-button color="warn" (click)="removeTag(i)" class="small-button">
               <mat-icon>delete</mat-icon>
             </button>
+            
+            
           </div>
-
-          <button mat-raised-button color="primary" type="button" (click)="addTag()">
+      
+          <button mat-raised-button color="primary" type="button" (click)="addTag()" style="width: 120px; height: 40px; font-size: 14px; padding: 8px; margin-bottom: 15px;">
             <mat-icon>add</mat-icon> Add Tag
           </button>
+          
         </div>
-      </div>
-    </div>
+      </div> 
+
+    </div> 
 
     <div style="display: flex; gap: 10px; justify-content: flex-start;">
       <button mat-raised-button color="primary" type="submit">Submit</button>

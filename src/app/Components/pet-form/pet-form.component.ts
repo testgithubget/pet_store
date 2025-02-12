@@ -88,7 +88,7 @@ export class PetFormComponent implements OnInit {
 
 
   generateRandomId(): number {
-    return Math.floor(1000 + Math.random() * 9000); // Generates a random 4-digit ID
+    return Math.floor(1000 + Math.random() * 9000); 
   }
 
   onSubmit(): void {
