@@ -1,5 +1,36 @@
+.filter{
+  padding: 16px 150px 16px 220px;
+  position:absolute;
+}
+.form {
+  min-width: 150px;
+  max-width: 600px;
+  width: 100%;
+  position:absolute;
+}
+.search_field{
+  width:500px
+}
+.search_button{
+  left:730px;
+  display: table-cell;
+  margin: 0px 8px 8px 0;
+  max-width: 600px;
+  position: absolute;
+}
+.search{
+  height:55px;
+}
+.selector{
+  left:900px;
+  position: absolute;
+}
+
 .example-card {
-    max-width: 400px;
+  top:100px;
+  width:400px;
+  display: flex;
+  justify-content: space-between;
   }
   
   .example-header-image {
@@ -9,11 +40,7 @@
   .example-card-footer {
     padding: 16px;
   }
-  .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
+
   .example-label {
     display: table-cell;
     font-size: 14px;
@@ -21,23 +48,18 @@
     min-width: 120px;
   }
   
-  .example-button-row {
-    display: table-cell;
-    max-width: 600px;
-  }
-  
-  .example-button-row .mat-mdc-button-base {
-    margin: 8px 8px 8px 0;
-  }
-  
   .example-flex-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
   }
-  
   .example-button-container {
     display: flex;
-    justify-content: center;
+    top:5px;
+    left: 280px;
     width: 140px;
+    position: absolute;
   }
+  
+
+  

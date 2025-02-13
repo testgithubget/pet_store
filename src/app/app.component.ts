@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { PetListComponent } from "./Components/pet-list/pet-list.component";
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-root',
