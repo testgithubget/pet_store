@@ -1,0 +1,30 @@
+.pet-detail-card {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .pet-detail-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .pet-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+  }
+  
+  .pet-info p {
+    margin: 5px 0;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  

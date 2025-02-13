@@ -64,7 +64,7 @@ export class PetFormComponent implements OnInit {
   addTag(): void {
     this.tags.push(
       this.fb.group({
-        id: [0], // ✅ Default to 0
+        id: [0],
         name: ['', Validators.required],
       })
     );

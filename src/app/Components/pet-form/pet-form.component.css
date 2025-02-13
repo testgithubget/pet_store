@@ -13,6 +13,8 @@ mat-card {
   margin: auto;
   padding: 60px;
   background-color: white;
+  border: 5px solid #deddeb; 
+
 }
 
 .form-container {
