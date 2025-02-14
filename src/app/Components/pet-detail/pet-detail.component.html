@@ -1,30 +1,35 @@
-<div class="pet-details-container">
+<div class="pet-details-container" *ngIf="pet">
   <mat-card>
-    <button mat-icon-button color="primary"  routerLink="/">
-      <mat-icon>arrow_back</mat-icon>
+    <button mat-raised-button color="accent" routerLink="/" style="margin-bottom: 20px;">
+      Back
     </button>
+    
     <mat-card-title>🐾 Pet Details</mat-card-title>
 
     <div class="pet-info">
       <div class="image-container">
-        <img *ngIf="imagePreview" [src]="imagePreview" class="image-preview" />
+        <!-- Display the image if available -->
+        <img *ngIf="imagePreview" [src]="imagePreview" class="image-preview" alt="Pet image" />
       </div>
 
       <div class="details">
-        <p><strong>Name:</strong> {{ petForm.value.name }}</p>
-        <p><strong>Category:</strong> {{ petForm.value.category.name }} (ID: {{ petForm.value.category.id }})</p>
-        <p><strong>Status:</strong> {{ petForm.value.status }}</p>
+        <p><strong>Name:</strong> {{ pet.name }}</p>
+        <p>
+          <strong>Category:</strong>
+          {{ pet.category?.name }} (ID: {{ pet.category?.id }})
+        </p>
+        <p><strong>Status:</strong> {{ pet.status }}</p>
 
         <p><strong>Tags:</strong></p>
         <ul>
-          <li *ngFor="let tag of petForm.value.tags">{{ tag.name }}</li>
+          <li *ngFor="let tag of pet.tags">{{ tag.name }}</li>
         </ul>
       </div>
     </div>
 
     <div class="actions">
-      <button mat-raised-button color="primary">Edit</button>
-      <button mat-raised-button color="warn">Delete</button>
+      <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+      <button mat-raised-button color="warn" (click)="pet.id !== undefined ? onDelete(pet.id) : null">Delete</button>
     </div>
   </mat-card>
 </div>

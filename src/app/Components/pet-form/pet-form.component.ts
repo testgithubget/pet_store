@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 import { MatOptionModule } from '@angular/material/core';
 import { PetService } from '../../Service/pet.service';
 import { Pet } from '../../Model/pet.model';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pet-form',
@@ -45,7 +45,9 @@ export class PetFormComponent implements OnInit {
   petForm!: FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private fb: FormBuilder, private petService: PetService) {}
+  constructor(private fb: FormBuilder, 
+              private petService: PetService,
+              private router: Router) {}
   ngOnInit(): void {
     this.petForm = this.fb.group({
       name: ['', Validators.required],
@@ -113,13 +115,16 @@ export class PetFormComponent implements OnInit {
         status: this.petForm.value.status,
       };
 
-      console.log('Submitting Pet Data:', JSON.stringify(pet, null, 2));
+      // console.log('Submitting Pet Data:', JSON.stringify(pet, null, 2));
 
       this.petService.createPet(pet).subscribe({
         next: (newPet) => {
           console.log('Pet created successfully:', newPet);
           // this.petForm.reset();
           // this.imagePreview = null; 
+
+          this.router.navigate(['/detail', newPet.id]); 
+
         },
         error: (err) => {
           console.error('Error creating pet:', err);
