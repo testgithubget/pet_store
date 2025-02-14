@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Injectable, viewChild } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
@@ -7,11 +7,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, NgForm} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorModule, MatPaginatorIntl} from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon'
 import { PetService } from '../../Service/pet.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+
+import { Subject } from 'rxjs';
+
+
 
 interface Status {
   value: string;
@@ -29,6 +33,13 @@ interface Status {
 export class PetListComponent {
   petlist: any[]=[];
   selectedStatus: string ="";
+  selectedId: number = 0;
+  petById: any;
+  card = document.getElementById('#petCard');
+
+  //pagination component
+  curPage = 1;
+  pageSize = 10;
 
   constructor(public service: PetService){
 
@@ -36,6 +47,7 @@ export class PetListComponent {
 
   ngOnInit(): void{
     this.getPetList();
+    this.getPetById();
   }
 
   status: Status[] = [
@@ -54,30 +66,54 @@ export class PetListComponent {
     // Clear the current pet list before making the new request
     this.petlist = [];
 
- 
-    // this.service.getPetByStatus(this.selectedStatus).subscribe({
-    //     next: res =>{
-    //       console.log(this.selectedStatus)
-    //       this.petlist = res
-    //       console.log(res)
-    //     },
-    //     error: err =>{
-    //       console.log(err)
-    //     }
-      
-    //   });
 
     this.service.getPetByStatus(this.selectedStatus).subscribe({
       next: res => {
         console.log('Selected status:', this.selectedStatus);  // Log the selected status
         this.petlist = res;  // Store the response in petlist
+        this.curPage=1;
         console.log('Pets fetched:', res);  // Log the response from the server
       },
       error: err => {
         console.error('Error fetching pets:', err);  // Log any errors
       }
     });
-  }
+
+     }
+     getPetById(): void{
+
+      if (!this.selectedId) {
+        console.warn('Please select a pet status.');
+        return; // Early return if no status is selected
+      }
+  
+      // Clear the current pet list before making the new request
+      this.petlist = [];
+  
+  
+      this.service.getPet(this.selectedId).subscribe({
+        next: res => {
+          console.log('Selected status:', this.selectedId);  // Log the selected status
+          this.petById = res;  // Store the response in petlist
+          console.log('Pets fetched:', res);  // Log the response from the server
+        },
+        error: err => {
+          console.error('Error fetching pets:', err);  // Log any errors
+        }
+      });
+  
+      
+       }
+
+       numberOfPages() {
+       return Math.ceil(this.petlist.length / this.pageSize);
+      //  return this.petlist.length;
+      }
+        goToPage(pageNumber: number): void {
+            if (pageNumber >= 1 && pageNumber <= this.numberOfPages()) {
+                this.curPage = pageNumber;
+            }
+        } 
 
 }
 

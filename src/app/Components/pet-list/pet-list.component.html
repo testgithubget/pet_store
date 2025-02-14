@@ -1,16 +1,16 @@
 
 <div class="filter">
 
-  <form class="form">
+  <div class="form">
     <mat-form-field class="search_field">
-      <mat-label>Favorite food</mat-label>
-      <input matInput placeholder="Ex. Pizza" value="Sushi">
+      <mat-label>Search Pet</mat-label>
+      <input matInput placeholder="Id" [(ngModel)]="selectedId">
     </mat-form-field>
-  </form>
+
 
   <section>
     <div class="search_button">
-      <button mat-raised-button class="search">Basic</button>
+      <button mat-raised-button class="search" (click)="getPetById()">Search</button>
     </div>
   </section>
 
@@ -22,10 +22,13 @@
       </mat-select>
     </mat-form-field>
   </div>
+  </div>
+
+
 
   </div>
 
-  <div class="carder" *ngFor = "let pet of petlist">
+  <div class="carder" id="petCard" *ngFor = "let pet of petlist | slice: (curPage * pageSize) - pageSize : curPage * pageSize">
     <div>
       <mat-card class="example-card" appearance="outlined" >
         <mat-card-header>
@@ -49,10 +52,40 @@
     </div>
   </div>
 
-<div class="paginator">
- <mat-paginator [length]="100"
-              [pageSize]="10"
+  <div class="carder" *ngFor = "let pet of petById">
+    <div>
+      <mat-card class="example-card" appearance="outlined" >
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + pet.photoUrls + ')'}"></div>
+          <mat-card-title>{{pet.name}}</mat-card-title>
+          <mat-card-subtitle>{{pet.category?.name}}</mat-card-subtitle>
+          <div class="example-button-container">
+            <button mat-fab extended>
+              <mat-icon></mat-icon>
+              {{pet.status}}
+            </button>
+          </div>
+        </mat-card-header>
+        <img mat-card-image [src]="pet.photoUrls" alt="Photo of a Shiba Inu">
+        <mat-card-footer class="example-card-footer">
+          <mat-chip-set aria-label="Chihuahua traits">
+              <mat-chip *ngFor="let tag of pet.tags">{{tag.name}}</mat-chip>
+          </mat-chip-set>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+
+<!-- <div class="paginator">
+ <mat-paginator
+              [length]="numberOfPages()"
               [pageSizeOptions]="[5, 10, 25, 100]"
               aria-label="Select page">
 </mat-paginator>
+</div> -->
+
+<div class="paginator">
+  <button [disabled]="curPage === 1" (click)="goToPage(curPage - 1)">Previous</button>
+  <span>Page {{curPage}} of [{{ numberOfPages() }}]</span>
+  <button [disabled]="curPage >= numberOfPages()" (click)="goToPage(curPage + 1)">Next</button>
 </div>

@@ -6,24 +6,23 @@
   min-width: 150px;
   max-width: 600px;
   width: 100%;
-  position:absolute;
+  display: flex;
+  justify-content: space-between;
+
 }
 .search_field{
+  padding: 0px 52px 8px 0;
   width:500px
 }
 .search_button{
-  left:730px;
-  display: table-cell;
-  margin: 0px 8px 8px 0;
+  margin: 0px 80px 8px 0;
   max-width: 600px;
-  position: absolute;
 }
 .search{
   height:55px;
 }
 .selector{
   left:900px;
-  position: absolute;
 }
 
 .example-card {
@@ -58,6 +57,11 @@
     top:5px;
     left: 280px;
     width: 140px;
+    position: absolute;
+  }
+  .paginator{
+    right:0;
+    bottom:0;
     position: absolute;
   }
   
