@@ -84,13 +84,13 @@ export class PetDetailComponent implements OnInit {
   onDelete(id: number | undefined) {
     if (id === undefined) {
       console.error('Pet ID is undefined. Cannot delete.');
-      return; // Prevent further execution
+      return; 
     }
   
     this.petService.deletePet(id).subscribe({
       next: (response) => {
-        // console.log(`Pet with ID ${id} deleted successfully.`);
-        this.refreshList(); // Refresh the list after deletion
+        console.log(`Pet with ID ${id} deleted successfully.`);
+        this.refreshList(); 
       },
       error: (error) => {
         console.error(`Error deleting pet with ID ${id}:`, error);

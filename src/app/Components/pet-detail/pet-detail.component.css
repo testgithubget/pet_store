@@ -28,7 +28,7 @@ mat-card {
 .image-container {
   flex: 1;
   padding: 20px;
-  border: 2px solid #ccc;
+  border: 2px dashed #ccc;
   border-radius: 8px;
   text-align: center;
   min-width: 250px;
