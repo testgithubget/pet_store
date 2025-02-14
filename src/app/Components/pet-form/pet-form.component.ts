@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { MatOptionModule } from '@angular/material/core';
 import { PetService } from '../../Service/pet.service';
 import { Pet } from '../../Model/pet.model';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pet-form',
@@ -35,6 +36,7 @@ import { Pet } from '../../Model/pet.model';
     MatCardModule,
     CommonModule,
     MatOptionModule,
+    RouterLink
   ],
   templateUrl: './pet-form.component.html',
   styleUrl: './pet-form.component.css',

@@ -1,30 +1,30 @@
-<form>
-<mat-card class="pet-detail-card">
-    <mat-card-header>
-      <mat-card-title>{{ pet?.name }}</mat-card-title>
-      <mat-card-subtitle>{{ pet?.breed }}</mat-card-subtitle>
-    </mat-card-header>
-  
-    <mat-card-content>
-      <div class="pet-detail-container">
-        <!-- Pet Image -->
-        <div class="pet-image">
-          <img *ngIf="pet?.image" [src]="pet.image" alt="{{ pet?.name }}" />
-        </div>
-  
-        <!-- Pet Information -->
-        <div class="pet-info">
-          <p><strong>Age:</strong> {{ pet?.age }} years</p>
-          <p><strong>Type:</strong> {{ pet?.type }}</p>
-          <p><strong>Owner:</strong> {{ pet?.owner }}</p>
-          <p><strong>Description:</strong> {{ pet?.description }}</p>
-        </div>
+<div class="pet-details-container">
+  <mat-card>
+    <button mat-icon-button color="primary"  routerLink="/">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <mat-card-title>🐾 Pet Details</mat-card-title>
+
+    <div class="pet-info">
+      <div class="image-container">
+        <img *ngIf="imagePreview" [src]="imagePreview" class="image-preview" />
       </div>
-    </mat-card-content>
-  
-    <mat-card-actions>
-      <!-- <button mat-raised-button color="accent" (click)="editPet()">Edit</button>
-      <button mat-raised-button color="warn" (click)="deletePet()">Delete</button> -->
-    </mat-card-actions>
+
+      <div class="details">
+        <p><strong>Name:</strong> {{ petForm.value.name }}</p>
+        <p><strong>Category:</strong> {{ petForm.value.category.name }} (ID: {{ petForm.value.category.id }})</p>
+        <p><strong>Status:</strong> {{ petForm.value.status }}</p>
+
+        <p><strong>Tags:</strong></p>
+        <ul>
+          <li *ngFor="let tag of petForm.value.tags">{{ tag.name }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button color="primary">Edit</button>
+      <button mat-raised-button color="warn">Delete</button>
+    </div>
   </mat-card>
-</form>
+</div>

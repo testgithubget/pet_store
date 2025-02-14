@@ -1,30 +1,89 @@
-.pet-detail-card {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .pet-detail-container {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  
-  .pet-image img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid #ccc;
-  }
-  
-  .pet-info p {
-    margin: 5px 0;
-  }
-  
-  mat-card-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
+.pet-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/assets/image.jpg'); 
+  background-size: cover;
+  background-position: center;
+  height: 100vh; 
+}
+
+mat-card {
+  max-width: 1300px;
+  width: 100%;
+  margin: auto;
+  padding: 60px;
+  background-color: white;
+  border: 5px solid #deddeb;
+}
+
+.pet-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.image-container {
+  flex: 1;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 250px;
+  max-width: 300px;
+  background-color: #f9f9f9;
+}
+
+.image-preview {
+  width: 100%;
+  max-width: 250px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.details p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+button {
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+}
+
+.small-button {
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  font-size: 16px;
+}
