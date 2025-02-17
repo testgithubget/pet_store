@@ -46,6 +46,8 @@ export class PetFormComponent implements OnInit {
   imagePreview: string | ArrayBuffer | null = null;
   isEditMode: boolean = false;
   petId!: number;
+  submitting = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -86,6 +88,12 @@ export class PetFormComponent implements OnInit {
         status: pet.status || 'available',
         photoUrls: pet.photoUrls || [],
       });
+
+       // If there's at least one image, display it
+    if (pet.photoUrls && pet.photoUrls.length > 0) {
+      this.imagePreview = pet.photoUrls[0]; // Assuming single image display
+    }
+    
 
       const tagsArray = this.petForm.get('tags') as FormArray;
       tagsArray.clear();
@@ -133,8 +141,10 @@ export class PetFormComponent implements OnInit {
     return Math.floor(1000 + Math.random() * 9000);
   }
 
+
   onSubmit(): void {
-    if (this.petForm.valid) {
+    if (this.petForm.valid && !this.submitting) {
+      this.submitting = true; 
       const pet: Pet = {
         id: this.isEditMode ? this.petId : this.generateRandomId(),
         name: this.petForm.value.name,
@@ -151,8 +161,21 @@ export class PetFormComponent implements OnInit {
         })),
         status: this.petForm.value.status,
       };
-
-      if (this.isEditMode === false) {
+  
+      if (this.isEditMode) {
+        this.petService.updatePet(pet).subscribe({
+          next: (updatedPet) => {
+            console.log('Pet updated successfully:', updatedPet);
+            this.router.navigate(['/detail', updatedPet.id]);
+          },
+          error: (err) => {
+            console.error('Error updating pet:', err);
+          },
+          complete: () => {
+            this.submitting = false; 
+          },
+        });
+      } else {
         this.petService.createPet(pet).subscribe({
           next: (newPet) => {
             console.log('Pet created successfully:', newPet);
@@ -161,10 +184,12 @@ export class PetFormComponent implements OnInit {
           error: (err) => {
             console.error('Error creating pet:', err);
           },
+          complete: () => {
+            this.submitting = true; 
+          },
         });
-      } else {
-        // update
       }
     }
   }
+  
 }
