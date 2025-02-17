@@ -32,14 +32,14 @@ interface Status {
 })
 export class PetListComponent {
   petlist: any[]=[];
-  selectedStatus: string ="";
+  selectedStatus: string ="available";
   selectedId: number = 0;
   petById: any;
-  card = document.getElementById('#petCard');
+  showMe: boolean = false;
 
   //pagination component
   curPage = 1;
-  pageSize = 10;
+  pageSize = 9;
 
   constructor(public service: PetService){
 
@@ -65,6 +65,9 @@ export class PetListComponent {
 
     // Clear the current pet list before making the new request
     this.petlist = [];
+    this.petById=''
+    this.showMe =false;
+    this.selectedId = 0;
 
 
     this.service.getPetByStatus(this.selectedStatus).subscribe({
@@ -83,18 +86,20 @@ export class PetListComponent {
      getPetById(): void{
 
       if (!this.selectedId) {
-        console.warn('Please select a pet status.');
+        console.warn('Please input a valid ID.');
         return; // Early return if no status is selected
       }
   
       // Clear the current pet list before making the new request
       this.petlist = [];
+      this.hideDiv()
   
   
       this.service.getPet(this.selectedId).subscribe({
         next: res => {
           console.log('Selected status:', this.selectedId);  // Log the selected status
           this.petById = res;  // Store the response in petlist
+          this.selectedStatus ="";
           console.log('Pets fetched:', res);  // Log the response from the server
         },
         error: err => {
@@ -114,6 +119,9 @@ export class PetListComponent {
                 this.curPage = pageNumber;
             }
         } 
+        hideDiv() {
+          this.showMe = true;
+      }
 
 }
 
