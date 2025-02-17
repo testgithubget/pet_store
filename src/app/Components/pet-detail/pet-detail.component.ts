@@ -9,7 +9,13 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { PetService } from '../../Service/pet.service';
 import { HttpClient } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -37,9 +43,28 @@ export class PetDetailComponent implements OnInit {
   pet!: Pet;
   imagePreview: string | null = null;
   id!: number;
+  petForm!: FormGroup;
+  petId: number | undefined;
 
 
-  constructor(private petService: PetService, private route: ActivatedRoute) {}
+  constructor(
+    private petService: PetService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.petForm = this.fb.group({
+      name: [''],
+      category: this.fb.group({
+        id: [0], // Default to 0
+        name: [''],
+      }),
+      status: ['available'], // Provide a default value
+      photoUrls: this.fb.array([]), // Ensure it is an array
+      tags: this.fb.array([]), // Use FormArray for dynamic tag management
+    });
+  }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const petId = Number(params.get('id'));
@@ -57,7 +82,7 @@ export class PetDetailComponent implements OnInit {
   refreshList() {
     // this.petService.getPetByStatus(status).subscribe({
     //   next: (pets) => {
-    //     this.pets = pets; 
+    //     this.pets = pets;
     //     console.log('Pet list refreshed:', this.pets);
     //   },
     //   error: (error) => {
@@ -83,22 +108,29 @@ export class PetDetailComponent implements OnInit {
 
   onDelete(id: number | undefined) {
     if (id === undefined) {
-      console.error('Pet ID is undefined. Cannot delete.');
-      return; 
+      return;
     }
-  
+
     this.petService.deletePet(id).subscribe({
       next: (response) => {
         console.log(`Pet with ID ${id} deleted successfully.`);
-        this.refreshList(); 
+        this.refreshList();
       },
       error: (error) => {
         console.error(`Error deleting pet with ID ${id}:`, error);
-      }
+      },
     });
   }
+
+  onEdit(pet: Pet): void {
+    this.router.navigate(['/edit', pet.id]);
+  }
   
+  
+  get tags() {
+    return this.petForm.get('tags') as FormArray;
+  }
 
-  onEdit() {}
-
+  
+  
 }

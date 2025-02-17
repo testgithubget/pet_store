@@ -28,7 +28,7 @@
     </div>
 
     <div class="actions">
-      <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+      <button mat-raised-button color="primary" (click)="onEdit(pet)">Edit</button>
       <button mat-raised-button color="warn" (click)="pet.id !== undefined ? onDelete(pet.id) : null">Delete</button>
     </div>
   </mat-card>

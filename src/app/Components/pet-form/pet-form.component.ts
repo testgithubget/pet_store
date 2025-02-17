@@ -36,7 +36,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
     MatCardModule,
     CommonModule,
     MatOptionModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './pet-form.component.html',
   styleUrl: './pet-form.component.css',
@@ -44,11 +44,20 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 export class PetFormComponent implements OnInit {
   petForm!: FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
+  isEditMode: boolean = false;
+  petId!: number;
 
-  constructor(private fb: FormBuilder, 
-              private petService: PetService,
-              private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private petService: PetService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
   ngOnInit(): void {
+    this.petId = +this.route.snapshot.paramMap.get('id')!;
+    this.isEditMode = this.petId ? true : false;
+
     this.petForm = this.fb.group({
       name: ['', Validators.required],
       category: this.fb.group({
@@ -58,6 +67,36 @@ export class PetFormComponent implements OnInit {
       photoUrls: [[], Validators.required],
       tags: this.fb.array([]),
       status: ['available', Validators.required],
+    });
+
+    if (this.isEditMode === false) {
+    } else {
+      this.loadPetData(); 
+    }
+  }
+
+  loadPetData(): void {
+    this.petService.getPet(this.petId).subscribe((pet: Pet) => {
+      this.petForm.patchValue({
+        name: pet.name,
+        category: {
+          id: pet.category?.id || 0,
+          name: pet.category?.name || '',
+        },
+        status: pet.status || 'available',
+        photoUrls: pet.photoUrls || [],
+      });
+
+      const tagsArray = this.petForm.get('tags') as FormArray;
+      tagsArray.clear();
+      pet.tags?.forEach((tag) => {
+        tagsArray.push(
+          this.fb.group({
+            id: [tag.id],
+            name: [tag.name],
+          })
+        );
+      });
     });
   }
 
@@ -84,52 +123,48 @@ export class PetFormComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreview = reader.result;
-        this.petForm.patchValue({ photoUrls: [reader.result as string] }); 
+        this.petForm.patchValue({ photoUrls: [reader.result as string] });
       };
       reader.readAsDataURL(file);
     }
   }
 
-
   generateRandomId(): number {
-    return Math.floor(1000 + Math.random() * 9000); 
+    return Math.floor(1000 + Math.random() * 9000);
   }
 
   onSubmit(): void {
     if (this.petForm.valid) {
       const pet: Pet = {
-        // id: 0, 
-        id: this.generateRandomId(), 
+        id: this.isEditMode ? this.petId : this.generateRandomId(),
         name: this.petForm.value.name,
         category: {
-          id: this.petForm.value.category.id || 0, 
+          id: this.petForm.value.category.id || 0,
           name: this.petForm.value.category.name,
         },
         photoUrls: this.petForm.value.photoUrls.length
           ? this.petForm.value.photoUrls
-          : [], 
-        tags: this.petForm.value.tags.map((tag: { id: any; name: any; }) => ({
-          id: tag.id || 0, 
+          : [],
+        tags: this.petForm.value.tags.map((tag: { id: any; name: any }) => ({
+          id: tag.id || 0,
           name: tag.name,
         })),
         status: this.petForm.value.status,
       };
 
-      // console.log('Submitting Pet Data:', JSON.stringify(pet, null, 2));
-
-      this.petService.createPet(pet).subscribe({
-        next: (newPet) => {
-          console.log('Pet created successfully:', newPet);
-          // this.petForm.reset();
-          // this.imagePreview = null; 
-
-          this.router.navigate(['/detail', newPet.id]); 
-
-        },
-        error: (err) => {
-          console.error('Error creating pet:', err);
-        },
-      });
+      if (this.isEditMode === false) {
+        this.petService.createPet(pet).subscribe({
+          next: (newPet) => {
+            console.log('Pet created successfully:', newPet);
+            this.router.navigate(['/detail', newPet.id]);
+          },
+          error: (err) => {
+            console.error('Error creating pet:', err);
+          },
+        });
+      } else {
+        // update
+      }
     }
   }
 }
