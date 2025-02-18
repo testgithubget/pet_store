@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pet } from '../Model/pet.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -27,13 +26,8 @@ export class PetService {
     return this.http.get<Pet>(`${this.baseUrl}/${id}`);
   }
 
-<<<<<<< HEAD
-  getPetByStatus(status: number): Observable<Pet> {
-    return this.http.get<Pet>(`${this.baseUrl}/${status}`);
-=======
   getPetByStatus(status: string): Observable<Pet[]> {
     return this.http.get<Pet[]>(`${this.baseUrl}/findByStatus?status=${status}`);
->>>>>>> 4e7bd13dcc29959884b181a4ba612b66548c1c45
   }
 
   createPet(pet: Pet): Observable<Pet> {

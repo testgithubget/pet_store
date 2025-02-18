@@ -3,4 +3,7 @@
     border-radius: 10px;
     margin-top: 25px;
     margin-left: 40px;
+    z-index: 2;
+    position: absolute;
   }
+  

@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import {Component} from '@angular/core';
-
-
-=======
 import {ChangeDetectionStrategy, Component, Injectable, viewChild } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -20,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu'
 
 import { Subject } from 'rxjs';
+import { MenuComponent } from '../menu/menu.component';
 
 
 
@@ -27,7 +23,6 @@ interface Status {
   value: string;
   viewValue: string;
 }
->>>>>>> 4e7bd13dcc29959884b181a4ba612b66548c1c45
 
 @Component({
   selector: 'app-pet-list',
@@ -38,9 +33,6 @@ interface Status {
   styleUrl: './pet-list.component.css',
 })
 export class PetListComponent {
-<<<<<<< HEAD
- 
-=======
   petlist: any[]=[];
   selectedStatus: string ="available";
   selectedId: number = 0;
@@ -133,6 +125,5 @@ export class PetListComponent {
           this.showMe = true;
       }
 
->>>>>>> 4e7bd13dcc29959884b181a4ba612b66548c1c45
 }
 
