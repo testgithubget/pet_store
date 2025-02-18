@@ -10,15 +10,22 @@
   padding-bottom: 170px;
   position: absolute;
 }
+.menuButton{
+  background: grey;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-left: 30px;
+}
 .back{
   top:17px;
   left:197px;
   width:961px;
   height:62px;
-  background:grey;
+  background:linear-gradient(90deg, 	#D3D3D3 62.3%, transparent 62.3% 77.3%, 	#D3D3D3 0);
   position:absolute;
 }
 .filter{
+  top:20px;
   margin-left:200px;
   position:absolute;
 }
@@ -61,7 +68,7 @@
   top:100px;
   width:400px;
   height:580px;
-  outline: 3px solid grey;
+  outline: 3px solid 	#D3D3D3;
 }
   
   .example-header-image {
@@ -91,8 +98,8 @@
     right:20px;
     bottom:10px;
     position:fixed;
-    background:grey;
-    outline:3px solid grey;
+    background:	#D3D3D3;
+    outline:3px solid 	#D3D3D3;
   }
 
   

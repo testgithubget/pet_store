@@ -1,0 +1,12 @@
+<button class='menuButton' mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item disabled>
+      <span>Pet List</span>
+    </button>
+    <button mat-menu-item>
+      <span>Add New Pet</span>
+    </button>
+  </mat-menu>
+  

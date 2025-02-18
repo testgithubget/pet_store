@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { PetService } from '../../Service/pet.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu'
 
 import { Subject } from 'rxjs';
 
@@ -25,7 +26,7 @@ interface Status {
 @Component({
   selector: 'app-pet-list',
   standalone: true,
-  imports: [HttpClientModule, MatFormFieldModule, MatInputModule, FormsModule, MatLabel, MatButtonModule, MatCardModule, MatChipsModule, MatSelectModule, MatPaginatorModule, MatIconModule, CommonModule],
+  imports: [HttpClientModule, MatFormFieldModule, MatInputModule, FormsModule, MatLabel, MatButtonModule, MatCardModule, MatChipsModule, MatSelectModule, MatPaginatorModule, MatIconModule, CommonModule, MatMenuModule],
 
   templateUrl: './pet-list.component.html',
   styleUrl: './pet-list.component.css'

@@ -2,6 +2,10 @@
 <div class="container">
 
 <div class="back"></div>
+
+
+
+
 <div class="filter">
 
   <div class="form">
@@ -89,7 +93,7 @@
 <div class="backPage"></div>
 <div class="paginator">
   <button mat-raised-button [disabled]="curPage === 1" (click)="goToPage(curPage - 1)" style="width: 100px; margin-right: 5px;">Previous</button>
-  <span>Page {{curPage}} of [{{ numberOfPages() }}]</span>
+  <span>Page {{curPage}} of {{ numberOfPages() }}</span>
   <button mat-raised-button [disabled]="curPage >= numberOfPages()" (click)="goToPage(curPage + 1)" style="width: 100px; margin-left:5px;">Next</button>
 </div>
 </div>
