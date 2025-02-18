@@ -89,9 +89,8 @@ export class PetFormComponent implements OnInit {
         photoUrls: pet.photoUrls || [],
       });
 
-       // If there's at least one image, display it
     if (pet.photoUrls && pet.photoUrls.length > 0) {
-      this.imagePreview = pet.photoUrls[0]; // Assuming single image display
+      this.imagePreview = pet.photoUrls[0];
     }
     
 

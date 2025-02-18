@@ -56,12 +56,12 @@ export class PetDetailComponent implements OnInit {
     this.petForm = this.fb.group({
       name: [''],
       category: this.fb.group({
-        id: [0], // Default to 0
+        id: [0], 
         name: [''],
       }),
-      status: ['available'], // Provide a default value
-      photoUrls: this.fb.array([]), // Ensure it is an array
-      tags: this.fb.array([]), // Use FormArray for dynamic tag management
+      status: ['available'], 
+      photoUrls: this.fb.array([]), 
+      tags: this.fb.array([]), 
     });
   }
 
@@ -80,15 +80,7 @@ export class PetDetailComponent implements OnInit {
   }
 
   refreshList() {
-    // this.petService.getPetByStatus(status).subscribe({
-    //   next: (pets) => {
-    //     this.pets = pets;
-    //     console.log('Pet list refreshed:', this.pets);
-    //   },
-    //   error: (error) => {
-    //     console.error('Error fetching pet list:', error);
-    //   }
-    // });
+    // this.router.navigate(['/']);
   }
 
   loadDetails(id: number): void {
