@@ -1,0 +1,105 @@
+.container{
+  top:0;
+  padding-top: 20px;
+  justify-content: center;
+  background-image: url('/assets/image.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  padding-bottom: 170px;
+  position: absolute;
+}
+.menuButton{
+  background: grey;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-left: 30px;
+}
+.back{
+  top:17px;
+  left:197px;
+  width:961px;
+  height:62px;
+  background:linear-gradient(90deg, 	#D3D3D3 62.3%, transparent 62.3% 77.3%, 	#D3D3D3 0);
+  position:absolute;
+}
+.filter{
+  top:20px;
+  margin-left:200px;
+  position:absolute;
+}
+.form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.search_field{
+  margin-right:10px;
+  width:500px;
+}
+.search_button{
+  margin-right: 150px;
+  max-width: 600px;
+}
+.search{
+  height:55px;;
+}
+
+.outer {
+  display: flex !important;
+  flex-wrap: wrap; /* Optional: Allows wrapping of children if necessary */
+  gap: 16px; /* Optional: Adds spacing between items */
+  justify-content: space-between; /* Optional: Centers items horizontally */
+  align-items: center; /* Optional: Centers items vertically */
+  margin: 10px;
+}
+.inner{
+  display: flex !important;
+  flex-wrap: wrap; /* Optional: Allows wrapping of children if necessary */
+  gap: 16px; /* Optional: Adds spacing between items */
+  justify-content: space-between; /* Optional: Centers items horizontally */
+  align-items: center; /* Optional: Centers items vertically */
+  margin: 10px;
+}
+
+.example-card{
+  top:100px;
+  width:400px;
+  height:580px;
+  outline: 3px solid 	#D3D3D3;
+}
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  .imager{
+    width:400px;
+    height: 430px;
+  }
+  .example-card-footer {
+    padding: 16px;
+  }
+  
+  .example-button-container {
+    display: flex;
+    top:5px;
+    left: 250px;
+    width: 140px;
+    position: absolute;
+  }
+  .stat-Button{
+    width:140px;
+  }
+  .paginator{
+    margin-top: auto;
+    right:20px;
+    bottom:10px;
+    position:fixed;
+    background:	#D3D3D3;
+    outline:3px solid 	#D3D3D3;
+  }
+
+  
