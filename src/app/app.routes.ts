@@ -5,8 +5,10 @@ import { PetDetailComponent } from './Components/pet-detail/pet-detail.component
 
 export const routes: Routes = [
     
-    {path: '', component : PetFormComponent},
+    {path: '', component : PetListComponent},
     {path: 'edit/:id', component: PetFormComponent },  
     {path: 'list' , component: PetListComponent},
-    {path: 'detail/:id' , component: PetDetailComponent}
+    {path: 'detail/:id' , component: PetDetailComponent},
+    {path: 'add' , component: PetFormComponent},
+    
 ];

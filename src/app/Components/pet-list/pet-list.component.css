@@ -64,10 +64,11 @@
 .outer {
   display: flex !important;
   flex-wrap: wrap; /* Optional: Allows wrapping of children if necessary */
-  gap: 16px; /* Optional: Adds spacing between items */
-  justify-content: space-between; /* Optional: Centers items horizontally */
+  gap: 100px; /* Optional: Adds spacing between items */
+  justify-content: flex-start; /* Optional: Centers items horizontally */
   align-items: center; /* Optional: Centers items vertically */
-  margin: 10px;
+  margin: 50px;
+  margin-left: 70px;
 }
 .inner{
   display: flex !important;
