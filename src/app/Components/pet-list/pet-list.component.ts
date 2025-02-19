@@ -1,8 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ComponentFactoryResolver,
   Injectable,
+  ViewChild,
   viewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -23,6 +26,7 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { Subject } from 'rxjs';
 import { MenuComponent } from '../menu/menu.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 interface Status {
   value: string;
@@ -46,7 +50,8 @@ interface Status {
     MatIconModule,
     CommonModule,
     MatMenuModule,
-  ],
+    SpinnerComponent
+],
 
   templateUrl: './pet-list.component.html',
   styleUrl: './pet-list.component.css',
@@ -62,14 +67,24 @@ export class PetListComponent {
   curPage = 1;
   pageSize = 9;
 
-  isLoading = true;
 
-  constructor(public service: PetService) {}
+  isLoading: boolean = true;
+  
+  constructor(public service: PetService,
+  ) {
+  }
+  
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = true; 
+    }, 3000);
+
     this.getPetList();
     this.getPetById();
   }
+
+ 
 
   status: Status[] = [
     { value: 'available', viewValue: 'Available' },
