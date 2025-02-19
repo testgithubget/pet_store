@@ -47,7 +47,7 @@ export class PetFormComponent implements OnInit {
   isEditMode: boolean = false;
   petId!: number;
   submitting = false;
-
+  isLoading = true;
 
   constructor(
     private fb: FormBuilder,
@@ -78,6 +78,7 @@ export class PetFormComponent implements OnInit {
   }
 
   loadPetData(): void {
+    this.isLoading = true;
     this.petService.getPet(this.petId).subscribe((pet: Pet) => {
       this.petForm.patchValue({
         name: pet.name,
