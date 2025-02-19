@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { Subject } from 'rxjs';
 import { MenuComponent } from '../menu/menu.component';
+import { Router, Routes } from '@angular/router';
 
 interface Status {
   value: string;
@@ -64,7 +65,7 @@ export class PetListComponent {
 
   isLoading = true;
 
-  constructor(public service: PetService) {}
+  constructor(public service: PetService, public route: Router) {}
 
   ngOnInit(): void {
     this.getPetList();
@@ -136,4 +137,8 @@ export class PetListComponent {
   hideDiv() {
     this.showMe = true;
   }
+  navigate(id: string){
+    this.route.navigate(['detail', id]);
+
+    }
 }
