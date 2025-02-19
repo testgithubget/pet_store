@@ -38,7 +38,7 @@
 
 <div class="outer">
   <div class="carder" id="petCard" *ngFor = "let pet of petlist.reverse() | slice: (curPage * pageSize) - pageSize : curPage * pageSize">
-    <mat-card class="example-card" appearance="outlined" >
+    <mat-card class="example-card" appearance="outlined" (click) ="navigate(pet.id)">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + pet.photoUrls + ')'}"></div>
         <mat-card-title>{{pet.name}}</mat-card-title>
@@ -63,7 +63,7 @@
 
 <div class="inner" *ngIf="showMe">
   <div class="carder" id='petcardID'>
-      <mat-card class="example-card" appearance="outlined" >
+      <mat-card class="example-card" appearance="outlined" (click) ="navigate(petById.id)">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + petById.photoUrls + ')'}"></div>
           <mat-card-title>{{petById.name}}</mat-card-title>

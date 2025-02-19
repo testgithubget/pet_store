@@ -26,7 +26,11 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { Subject } from 'rxjs';
 import { MenuComponent } from '../menu/menu.component';
+<<<<<<< HEAD
 import { SpinnerComponent } from '../spinner/spinner.component';
+=======
+import { Router, Routes } from '@angular/router';
+>>>>>>> 9e0b1c569431bd8db9f38109c0ccac799e230de9
 
 interface Status {
   value: string;
@@ -68,12 +72,16 @@ export class PetListComponent {
   pageSize = 9;
 
 
+<<<<<<< HEAD
   isLoading: boolean = true;
   
   constructor(public service: PetService,
   ) {
   }
   
+=======
+  constructor(public service: PetService, public route: Router) {}
+>>>>>>> 9e0b1c569431bd8db9f38109c0ccac799e230de9
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -151,4 +159,8 @@ export class PetListComponent {
   hideDiv() {
     this.showMe = true;
   }
+  navigate(id: string){
+    this.route.navigate(['detail', id]);
+
+    }
 }
