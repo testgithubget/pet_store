@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <div class="statusCard">
+  <div class="statusCard" >
 
     <div class="carder" id="petCard" *ngFor = "let pet of petlist.reverse() | slice: (curPage * pageSize) - pageSize : curPage * pageSize">
       <mat-card class="card" appearance="outlined" (click) ="navigate(pet.id)">
