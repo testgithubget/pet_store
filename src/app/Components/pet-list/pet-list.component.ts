@@ -66,7 +66,7 @@ export class PetListComponent {
 
   //pagination component
   curPage = 1;
-  pageSize = 9;
+  pageSize = 12;
 
 
   isLoading: boolean = true;
@@ -106,53 +106,58 @@ export class PetListComponent {
 
     this.service.getPetByStatus(this.selectedStatus).subscribe({
       next: (res) => {
-        console.log('Selected status:', this.selectedStatus); // Log the selected status
-        this.petlist = res; // Store the response in petlist
+
+        console.log('Selected status:', this.selectedStatus);
+        this.petlist = this.service.filterDuplicatePets(res);
         this.curPage = 1;
-        console.log('Pets fetched:', res); // Log the response from the server
+        console.log('Pets fetched:', res);
       },
       error: (err) => {
-        console.error('Error fetching pets:', err); // Log any errors
+        console.error('Error fetching pets:', err);
       },
     });
   }
   getPetById(): void {
     if (!this.selectedId) {
       console.warn('Please input a valid ID.');
-      return; // Early return if no status is selected
+      return;
     }
 
-    // Clear the current pet list before making the new request
     this.petlist = [];
     this.hideDiv();
 
     this.service.getPet(this.selectedId).subscribe({
       next: (res) => {
-        console.log('Selected status:', this.selectedId); // Log the selected status
-        this.petById = res; // Store the response in petlist
+        console.log('Selected status:', this.selectedId);
+        this.petById = res;
         this.selectedStatus = '';
-        console.log('Pets fetched:', res); // Log the response from the server
+        console.log('Pets fetched:', res);
       },
       error: (err) => {
-        console.error('Error fetching pets:', err); // Log any errors
+        console.error('Error fetching pets:', err);
       },
     });
   }
 
   numberOfPages() {
+    if(this.petlist.length===0){
+      return 1
+    }else{
     return Math.ceil(this.petlist.length / this.pageSize);
-    //  return this.petlist.length;
+    }
   }
+
   goToPage(pageNumber: number): void {
     if (pageNumber >= 1 && pageNumber <= this.numberOfPages()) {
       this.curPage = pageNumber;
     }
   }
+
   hideDiv() {
     this.showMe = true;
   }
+
   navigate(id: string){
     this.route.navigate(['detail', id]);
-
     }
 }
