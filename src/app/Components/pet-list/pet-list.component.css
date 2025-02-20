@@ -9,6 +9,9 @@
   width: 100%;
   padding-bottom: 170px;
   position: absolute;
+  min-height: 100vh; 
+
+  /* height: 230vh; */
 }
 
 .head{
