@@ -30,6 +30,15 @@ export class PetService {
     return this.http.get<Pet[]>(`${this.baseUrl}/findByStatus?status=${status}`);
   }
 
+  filterDuplicatePets(pets: Pet[]): Pet[] {
+    let duplicatePetIds = pets
+      .map(pet => pet.id)
+      .filter((id, index, self) => self.indexOf(id) !== self.lastIndexOf(id));
+
+    return pets.filter(pet => !duplicatePetIds.includes(pet.id));
+  }
+
+
   createPet(pet: Pet): Observable<Pet> {
     return this.http.post<Pet>(this.baseUrl, pet);
   }
