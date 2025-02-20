@@ -4,8 +4,6 @@
     align-items: center;
     height: 100%; 
     background-color: transparent; 
-
-    
   }
   
   .custom-spinner {
@@ -16,7 +14,6 @@
     height: 50px; 
     animation: spin 1s linear infinite; 
     background-color: transparent; 
-
   }
   
   /* Keyframes for the spinning animation */

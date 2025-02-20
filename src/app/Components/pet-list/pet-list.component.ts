@@ -64,13 +64,13 @@ export class PetListComponent {
   selectedId: number = 0;
   petById: any;
   showMe: boolean = false;
+  isLoading: boolean = true;
 
   //pagination component
   curPage = 1;
   pageSize = 12;
 
 
-  isLoading: boolean = true;
   
  
   
@@ -78,7 +78,7 @@ export class PetListComponent {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.isLoading = true; 
+      this.isLoading = false; 
     }, 3000);
 
     this.getPetList();
@@ -94,46 +94,34 @@ export class PetListComponent {
   ];
 
   getPetList(): void {
+    this.isLoading = true; 
+
     if (!this.selectedStatus) {
       console.warn('Please select a pet status.');
-      return; // Early return if no status is selected
+      return;
     }
   
-    // Clear the current pet list before making the new request
     this.petlist = [];
     this.petById = '';
     this.showMe = false;
     this.selectedId = 0;
   
     this.service.getPetByStatus(this.selectedStatus).subscribe({
-<<<<<<< HEAD
-      next: (res: Pet[]) => { // Ensure res is treated as an array of Pet objects
-        console.log('Selected status:', this.selectedStatus); // Log the selected status
-  
-        // Remove duplicates and exclude pet with ID 9223372016900016000
-        this.petlist = res.reduce<Pet[]>((acc, pet) => {
-          if (pet.id !== 9223372016900016000 && !acc.some(existingPet => existingPet.id === pet.id)) {
-            acc.push(pet);
-          }
-          return acc;
-        }, []);
-  
-        this.curPage = 1;
-  
-        console.log('Pets fetched (duplicates removed and excluded ID):', this.petlist);
-=======
       next: (res) => {
 
         console.log('Selected status:', this.selectedStatus);
         this.petlist = this.service.filterDuplicatePets(res);
         this.curPage = 1;
         console.log('Pets fetched:', res);
->>>>>>> 37837fef1e94511490fde904b9e51b076949da20
       },
       error: (err) => {
         console.error('Error fetching pets:', err);
       },
     });
+
+    setTimeout(() => {
+      this.isLoading = false; // Hide spinner
+    }, 3000); // Simulate a 3-second delay
   }
   
   
