@@ -1,7 +1,10 @@
 
-<app-spinner [isLoading]="isLoading">
+<!-- <app-spinner [isLoading]="isLoading">
   <p *ngIf="!isLoading"></p>
-</app-spinner>
+</app-spinner> -->
+
+
+<app-spinner [isLoading]="isLoading"></app-spinner>
 
 
 <div class="container">
@@ -36,7 +39,7 @@
     </div>
   </div>
 
-  <div class="statusCard" >
+  <div class="statusCard"  *ngIf="!isLoading">
 
     <div class="carder" id="petCard" *ngFor = "let pet of petlist.reverse() | slice: (curPage * pageSize) - pageSize : curPage * pageSize">
       <mat-card class="card" appearance="outlined" (click) ="navigate(pet.id)">

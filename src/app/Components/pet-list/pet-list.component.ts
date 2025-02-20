@@ -64,13 +64,13 @@ export class PetListComponent {
   selectedId: number = 0;
   petById: any;
   showMe: boolean = false;
+  isLoading: boolean = true;
 
   //pagination component
   curPage = 1;
   pageSize = 12;
 
 
-  isLoading: boolean = true;
   
  
   
@@ -78,7 +78,7 @@ export class PetListComponent {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.isLoading = true; 
+      this.isLoading = false; 
     }, 3000);
 
     this.getPetList();
@@ -94,12 +94,13 @@ export class PetListComponent {
   ];
 
   getPetList(): void {
+    this.isLoading = true; 
+
     if (!this.selectedStatus) {
       console.warn('Please select a pet status.');
-      return; // Early return if no status is selected
+      return;
     }
   
-    // Clear the current pet list before making the new request
     this.petlist = [];
     this.petById = '';
     this.showMe = false;
@@ -117,6 +118,10 @@ export class PetListComponent {
         console.error('Error fetching pets:', err);
       },
     });
+
+    setTimeout(() => {
+      this.isLoading = false; // Hide spinner
+    }, 3000); // Simulate a 3-second delay
   }
   
   

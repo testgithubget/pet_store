@@ -1,3 +1,4 @@
+
 .container{
   top:0;
   padding-top:20px;
@@ -7,6 +8,7 @@
   background-size: cover;
   background-attachment:fixed;
   width:100%;
+  min-height: 100vh;
   padding-bottom:170px;
   position:absolute;
 }
@@ -45,6 +47,7 @@
   height:100%;
   display:flex;
   justify-content:space-between;
+  
 }
 
 .search_field{
@@ -67,6 +70,10 @@
   justify-content: flex-start;
   align-items: center;
   gap:40px;
+
+}
+.statusCard > div, .idCard > div {
+  flex: 1 1 200px; /* Example: makes child elements flexible, but at least 200px wide */
 }
 .statusCard {
   margin: auto;
@@ -100,6 +107,7 @@
     left: 200px;
     width: 90px;
     position: absolute;
+    
   }
   .stat-Button{
     width:90px;
