@@ -1,5 +1,5 @@
 .pet-details-container {
-  top:0;
+  position: relative;
   padding-top: 20px;
   justify-content: center;
   background-image: url('/assets/image.jpg');
@@ -7,8 +7,10 @@
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
+  min-height: 90vh; 
   padding-bottom: 40px;
 }
+
 
 mat-card {
   max-width: 1000px;
