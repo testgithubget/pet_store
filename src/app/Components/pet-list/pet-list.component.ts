@@ -106,29 +106,12 @@ export class PetListComponent {
     this.selectedId = 0;
   
     this.service.getPetByStatus(this.selectedStatus).subscribe({
-<<<<<<< HEAD
-      next: (res: Pet[]) => { // Ensure res is treated as an array of Pet objects
-        console.log('Selected status:', this.selectedStatus); // Log the selected status
-  
-        // Remove duplicates and exclude pet with ID 9223372016900016000
-        this.petlist = res.reduce<Pet[]>((acc, pet) => {
-          if (pet.id !== 9223372016900016000 && !acc.some(existingPet => existingPet.id === pet.id)) {
-            acc.push(pet);
-          }
-          return acc;
-        }, []);
-  
-        this.curPage = 1;
-  
-        console.log('Pets fetched (duplicates removed and excluded ID):', this.petlist);
-=======
       next: (res) => {
 
         console.log('Selected status:', this.selectedStatus);
         this.petlist = this.service.filterDuplicatePets(res);
         this.curPage = 1;
         console.log('Pets fetched:', res);
->>>>>>> 37837fef1e94511490fde904b9e51b076949da20
       },
       error: (err) => {
         console.error('Error fetching pets:', err);
