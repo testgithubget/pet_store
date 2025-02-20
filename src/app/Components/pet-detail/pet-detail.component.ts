@@ -22,6 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 import { Pet } from '../../Model/pet.model';
+import { ConfirmationComponent } from '../notification/confirmation/confirmation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pet-detail',
@@ -51,7 +53,8 @@ export class PetDetailComponent implements OnInit {
     private petService: PetService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     this.petForm = this.fb.group({
       name: [''],
@@ -98,22 +101,31 @@ export class PetDetailComponent implements OnInit {
     );
   }
 
-  onDelete(id: number | undefined) {
+  onDelete(id: number | undefined): void {
     if (id === undefined) {
       return;
     }
 
-    this.petService.deletePet(id).subscribe({
-      next: (response) => {
-        console.log(`Pet with ID ${id} deleted successfully.`);
-        this.refreshList();
-      },
-      error: (error) => {
-        console.error(`Error deleting pet with ID ${id}:`, error);
-      },
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.petService.deletePet(id).subscribe({
+          next: () => {
+            console.log(`Pet with ID ${id} deleted successfully.`);
+            this.router.navigate(['list']);
+          },
+          error: (error) => {
+            console.error(`Error deleting pet with ID ${id}:`, error);
+          },
+        });
+      }
     });
   }
 
+  
   onEdit(pet: Pet): void {
     this.router.navigate(['/edit', pet.id]);
   }

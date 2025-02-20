@@ -28,6 +28,7 @@ import { Subject } from 'rxjs';
 import { MenuComponent } from '../menu/menu.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { Router, Routes } from '@angular/router';
+import { Pet } from '../../Model/pet.model';
 
 interface Status {
   value: string;
@@ -97,25 +98,37 @@ export class PetListComponent {
       console.warn('Please select a pet status.');
       return; // Early return if no status is selected
     }
-
+  
     // Clear the current pet list before making the new request
     this.petlist = [];
     this.petById = '';
     this.showMe = false;
     this.selectedId = 0;
-
+  
     this.service.getPetByStatus(this.selectedStatus).subscribe({
-      next: (res) => {
+      next: (res: Pet[]) => { // Ensure res is treated as an array of Pet objects
         console.log('Selected status:', this.selectedStatus); // Log the selected status
-        this.petlist = res; // Store the response in petlist
+  
+        // Remove duplicates and exclude pet with ID 9223372016900016000
+        this.petlist = res.reduce<Pet[]>((acc, pet) => {
+          if (pet.id !== 9223372016900016000 && !acc.some(existingPet => existingPet.id === pet.id)) {
+            acc.push(pet);
+          }
+          return acc;
+        }, []);
+  
         this.curPage = 1;
-        console.log('Pets fetched:', res); // Log the response from the server
+  
+        console.log('Pets fetched (duplicates removed and excluded ID):', this.petlist);
       },
       error: (err) => {
-        console.error('Error fetching pets:', err); // Log any errors
+        console.error('Error fetching pets:', err);
       },
     });
   }
+  
+  
+  
   getPetById(): void {
     if (!this.selectedId) {
       console.warn('Please input a valid ID.');
