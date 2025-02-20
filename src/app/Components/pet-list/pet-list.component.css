@@ -7,7 +7,6 @@
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
-  height: auto;
   padding-bottom: 170px;
   position: absolute;
 }
@@ -85,6 +84,7 @@
   width:400px;
   height:580px;
   outline: 3px solid 	#D3D3D3;
+  cursor: pointer;
 }
   
   .example-header-image {
