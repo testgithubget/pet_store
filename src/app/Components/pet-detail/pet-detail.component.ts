@@ -36,7 +36,7 @@ import { MatDialog } from '@angular/material/dialog';
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
-    RouterLink,
+    
   ],
   templateUrl: './pet-detail.component.html',
   styleUrl: './pet-detail.component.css',
