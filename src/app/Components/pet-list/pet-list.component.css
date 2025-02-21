@@ -68,7 +68,7 @@
   display: flex !important;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: center;
+
   gap:40px;
 
 }
@@ -77,10 +77,10 @@
 }
 .statusCard {
   margin: auto;
-  margin-left: 10px;
+  margin-left: 40px;
 }
 .idCard{
-  margin-left: 10px;
+  margin-left: 40px;
 }
 
 .card{

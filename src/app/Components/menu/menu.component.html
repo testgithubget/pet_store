@@ -1,12 +1,27 @@
-
+<!-- 
 <button class='menuButton' mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     <mat-icon>menu</mat-icon>
   </button>
+  <div class="menuDiv">
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/list">
+    <button mat-menu-item routerLink="/list" [disabled]="true" *ngIf="!isOnAdd">
       <span>Pet List</span>
     </button>
-    <button mat-menu-item routerLink="/add">
+    <button mat-menu-item routerLink="/add" [disabled]="true" *ngIf="isOnList">
       <span>Add New Pet</span>
     </button>
   </mat-menu>
+  </div> -->
+  <button class='menuButton' mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+</button>
+<div class="menuDiv">
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/list" [disabled]="!isOnAdd" class="greyed-out">
+      <span>Pet List</span>
+    </button>
+    <button mat-menu-item routerLink="/add" [disabled]="!isOnList" class="greyed-out">
+      <span>Add New Pet</span>
+    </button>
+  </mat-menu>
+</div>
