@@ -61,7 +61,7 @@ interface Status {
 export class PetListComponent {
   petlist: any[] = [];
   selectedStatus: string = 'available';
-  selectedId: number = 0;
+  selectedId: any ;
   petById: any;
   showMe: boolean = false;
   isLoading: boolean = true;
@@ -104,7 +104,7 @@ export class PetListComponent {
     this.petlist = [];
     this.petById = '';
     this.showMe = false;
-    this.selectedId = 0;
+    this.selectedId = '';
   
     this.service.getPetByStatus(this.selectedStatus).subscribe({
       next: (res) => {
