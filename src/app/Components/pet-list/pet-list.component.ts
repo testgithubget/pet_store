@@ -61,11 +61,7 @@ interface Status {
 export class PetListComponent {
   petlist: any[] = [];
   selectedStatus: string = 'available';
-<<<<<<< HEAD
   selectedId: any ;
-=======
-  selectedId: any
->>>>>>> 1a880e447cfb14966893dad26326cff17dfe4779
   petById: any;
   showMe: boolean = false;
   isLoading: boolean = true;
