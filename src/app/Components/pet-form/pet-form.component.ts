@@ -20,6 +20,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { PetService } from '../../Service/pet.service';
 import { Pet } from '../../Model/pet.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pet-form',
@@ -37,6 +38,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
     CommonModule,
     MatOptionModule,
     RouterLink,
+    ToastrModule,
+    
   ],
   templateUrl: './pet-form.component.html',
   styleUrl: './pet-form.component.css',
@@ -53,7 +56,8 @@ export class PetFormComponent implements OnInit {
     private fb: FormBuilder,
     private petService: PetService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toaster: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -167,7 +171,10 @@ export class PetFormComponent implements OnInit {
           next: (updatedPet) => {
             console.log('Pet updated successfully:', updatedPet);
             this.router.navigate(['/detail', updatedPet.id]);
-          },
+            
+              this.toaster.success('Pet updated successfully');
+            
+         },
           error: (err) => {
             console.error('Error updating pet:', err);
           },
@@ -178,6 +185,8 @@ export class PetFormComponent implements OnInit {
       } else {
         this.petService.createPet(pet).subscribe({
           next: (newPet) => {
+            this.toaster.success('Pet Registered Successully');
+            this.submitting = false;
             console.log('Pet created successfully:', newPet);
             this.router.navigate(['/detail', newPet.id]);
           },

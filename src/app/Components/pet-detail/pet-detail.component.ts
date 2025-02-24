@@ -24,6 +24,7 @@ import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 import { Pet } from '../../Model/pet.model';
 import { ConfirmationComponent } from '../notification/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pet-detail',
@@ -54,7 +55,8 @@ export class PetDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toaster: ToastrService
   ) {
     this.petForm = this.fb.group({
       name: [''],
@@ -104,12 +106,15 @@ export class PetDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '300px',
+
+      
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.petService.deletePet(id).subscribe({
           next: () => {
+            this.toaster.success('pet deleted succesfully')
             console.log(`Pet with ID ${id} deleted successfully.`);
             this.router.navigate(['list']);
           },
