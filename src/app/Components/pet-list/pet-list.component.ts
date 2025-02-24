@@ -29,6 +29,7 @@ import { MenuComponent } from '../menu/menu.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { Router, Routes } from '@angular/router';
 import { Pet } from '../../Model/pet.model';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 interface Status {
   value: string;
@@ -52,7 +53,9 @@ interface Status {
     MatIconModule,
     CommonModule,
     MatMenuModule,
-    SpinnerComponent
+    SpinnerComponent,
+    ToastrModule
+  
 ],
 
   templateUrl: './pet-list.component.html',
@@ -61,7 +64,7 @@ interface Status {
 export class PetListComponent {
   petlist: any[] = [];
   selectedStatus: string = 'available';
-  selectedId: any
+  selectedId: any ;
   petById: any;
   showMe: boolean = false;
   isLoading: boolean = true;
@@ -73,7 +76,7 @@ export class PetListComponent {
 
   
  
-  constructor(public service: PetService, public route: Router) {}
+  constructor(public service: PetService, public route: Router ,private toaster: ToastrService) {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -81,7 +84,7 @@ export class PetListComponent {
     }, 3000);
 
     this.getPetList();
-    this.getPetById();
+    // this.getPetById();
   }
 
  
@@ -128,12 +131,19 @@ export class PetListComponent {
   getPetById(): void {
     if (!this.selectedId) {
       console.warn('Please input a valid ID.');
+      this.toaster.warning('No pet selected')
       return;
     }
 
     this.petlist = [];
     this.hideDiv();
-
+    // if (!this.selectedId) {
+    //   this.toaster.warning('No pet selected', 'Warning', {
+    //     timeOut: 3000,
+    //     positionClass: 'toast-top-right'
+    //   });
+    //   return; // Stop execution if no ID is selected
+    // }
     this.service.getPet(this.selectedId).subscribe({
       next: (res) => {
         console.log('Selected status:', this.selectedId);
