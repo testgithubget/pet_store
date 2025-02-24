@@ -131,19 +131,12 @@ export class PetListComponent {
   getPetById(): void {
     if (!this.selectedId) {
       console.warn('Please input a valid ID.');
-      this.toaster.warning('No pet selected')
+      this.toaster.warning('No Pet Id Entered');
       return;
     }
 
     this.petlist = [];
     this.hideDiv();
-    // if (!this.selectedId) {
-    //   this.toaster.warning('No pet selected', 'Warning', {
-    //     timeOut: 3000,
-    //     positionClass: 'toast-top-right'
-    //   });
-    //   return; // Stop execution if no ID is selected
-    // }
     this.service.getPet(this.selectedId).subscribe({
       next: (res) => {
         console.log('Selected status:', this.selectedId);
@@ -152,7 +145,10 @@ export class PetListComponent {
         console.log('Pets fetched:', res);
       },
       error: (err) => {
+        this.showMe = false;
         console.error('Error fetching pets:', err);
+        this.getPetList();
+        this.toaster.error('Pet Not Found');
       },
     });
   }
