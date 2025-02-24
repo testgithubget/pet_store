@@ -61,7 +61,11 @@ interface Status {
 export class PetListComponent {
   petlist: any[] = [];
   selectedStatus: string = 'available';
+<<<<<<< HEAD
   selectedId: any ;
+=======
+  selectedId: any
+>>>>>>> 1a880e447cfb14966893dad26326cff17dfe4779
   petById: any;
   showMe: boolean = false;
   isLoading: boolean = true;
@@ -73,7 +77,6 @@ export class PetListComponent {
 
   
  
-  
   constructor(public service: PetService, public route: Router) {}
 
   ngOnInit(): void {
@@ -120,8 +123,8 @@ export class PetListComponent {
     });
 
     setTimeout(() => {
-      this.isLoading = false; // Hide spinner
-    }, 3000); // Simulate a 3-second delay
+      this.isLoading = false;
+    }, 3000);
   }
   
   

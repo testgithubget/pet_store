@@ -7,5 +7,12 @@
     position: absolute;
     position: fixed;
   }
-  
-  
+button[disabled].greyed-out {
+  background-color: #f5f5f5;
+  color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+button[disabled].greyed-out mat-icon {
+  color: #b0b0b0;
+}

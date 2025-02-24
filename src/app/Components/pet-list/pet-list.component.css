@@ -1,3 +1,4 @@
+
 .container{
   top:0;
   padding-top:20px;
@@ -5,15 +6,12 @@
   background-image: url('/assets/image.jpg');
   background-position: center;
   background-size: cover;
-  background-attachment: fixed;
-  width: 100%;
-  padding-bottom: 170px;
-  position: absolute;
-  min-height: 100vh; 
-
-  /* height: 230vh; */
+  background-attachment:fixed;
+  width:100%;
+  min-height: 100vh;
+  padding-bottom:170px;
+  position:absolute;
 }
-
 .head{
   top:0;
   padding-top: 20px;
@@ -49,6 +47,7 @@
   height:100%;
   display:flex;
   justify-content:space-between;
+  
 }
 
 .search_field{
@@ -69,16 +68,23 @@
   display: flex !important;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: center;
+
   gap:40px;
+<<<<<<< HEAD
   padding-left: 40px;
+=======
+
+}
+.statusCard > div, .idCard > div {
+  flex: 1 1 200px; /* Example: makes child elements flexible, but at least 200px wide */
+>>>>>>> 1a880e447cfb14966893dad26326cff17dfe4779
 }
 .statusCard {
   margin: auto;
-  margin-left: 10px;
+  margin-left: 40px;
 }
 .idCard{
-  margin-left: 10px;
+  margin-left: 40px;
 }
 
 .card{
@@ -105,6 +111,7 @@
     left: 200px;
     width: 90px;
     position: absolute;
+    
   }
   .stat-Button{
     width:90px;

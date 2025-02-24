@@ -82,10 +82,6 @@ export class PetDetailComponent implements OnInit {
     });
   }
 
-  // refreshList() {
-  //   // this.router.navigate(['/']);
-  // }
-
   loadDetails(id: number): void {
     console.log('Testing with hardcoded Pet ID:', id);
 
