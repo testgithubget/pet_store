@@ -68,12 +68,10 @@
   display: flex !important;
   flex-wrap: wrap;
   justify-content: flex-start;
-
   gap:40px;
-
 }
 .statusCard > div, .idCard > div {
-  flex: 1 1 200px; /* Example: makes child elements flexible, but at least 200px wide */
+  flex: 1 1 200px;
 }
 .statusCard {
   margin: auto;
